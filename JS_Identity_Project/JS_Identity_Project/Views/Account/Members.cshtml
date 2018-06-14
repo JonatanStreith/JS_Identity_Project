@@ -1,0 +1,49 @@
+﻿@model IEnumerable<JS_Identity_Project.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Members";
+}
+
+<h2>Members</h2>
+
+
+<div class="row col-lg-12 col-md-12">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit_user", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details_user", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete_user", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,11 +1,10 @@
 ﻿using JS_Identity_Project.Models;
-using JS_Identity_Project.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace JS_Identity.Models
+namespace JS_Identity_Project.Models
 {
     public class StaticData
     {
@@ -59,6 +58,8 @@ namespace JS_Identity.Models
             {
                 context.Cities.AddRange(Cities);
                 context.Countries.AddRange(Countries);
+
+                context.SaveChanges();
             }
 
 

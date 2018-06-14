@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using JS_Identity_Project.Models;
+
 
 namespace JS_Identity_Project.Controllers
 {
@@ -10,6 +12,9 @@ namespace JS_Identity_Project.Controllers
     {
         public ActionResult Index()
         {
+            //StaticData.AddData();
+
+
             return View();
         }
 
@@ -26,5 +31,7 @@ namespace JS_Identity_Project.Controllers
 
             return View();
         }
+
+
     }
 }

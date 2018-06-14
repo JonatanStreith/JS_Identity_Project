@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace JS_Identity_Project.Models.Database
+namespace JS_Identity_Project.Models
 {
     public class WorldContext : DbContext
     {
