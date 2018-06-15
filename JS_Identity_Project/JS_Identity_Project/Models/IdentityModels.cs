@@ -10,7 +10,7 @@ namespace JS_Identity_Project.Models
     public class ApplicationUser : IdentityUser
     {
 
-    public Country Country;
+    public virtual Country Country { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
