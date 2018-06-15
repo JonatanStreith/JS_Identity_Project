@@ -9,6 +9,7 @@ namespace JS_Identity_Project
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            CreateRoles();
         }
     }
 }

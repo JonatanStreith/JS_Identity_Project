@@ -1,16 +1,16 @@
 ﻿@model JS_Identity_Project.Models.ApplicationUser
 
 
-    @using (Ajax.BeginForm("FinalizeEditUser", "Account", new { id = Model.Id }, new AjaxOptions
-    {
+@using (Ajax.BeginForm("FinalizeEditUser", "Account", new { id = Model.Id }, new AjaxOptions
+        {
+            UpdateTargetId = Model.Id,
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
 
-        UpdateTargetId = Model.Id,
-        HttpMethod = "POST",
-        InsertionMode = InsertionMode.Replace
-    }))
+}))
 
     {
-<tr id="@Model">
+<tr id="@Model.Id">
 
     <td>
         <input type="email" name="email" value=@Model.Email />
@@ -23,8 +23,10 @@
     <td>
         <input type="text" name="username" value=@Model.UserName />
     </td>
+    <td>
+        < input type = "submit" class="btn btn-default" value="Submit" />
+    </td>
 
-    </tr>
+</tr>
 
-    <input type = "submit" class="btn btn-default" value="Submit" />
 }

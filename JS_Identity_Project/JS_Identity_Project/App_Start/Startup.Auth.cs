@@ -6,11 +6,23 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using JS_Identity_Project.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace JS_Identity_Project
 {
     public partial class Startup
     {
+        public void CreateRoles()
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+
+            if (!roleManager.RoleExists("Admin"))
+            {
+                roleManager.Create(new IdentityRole("Admin"));
+            }
+        }
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {

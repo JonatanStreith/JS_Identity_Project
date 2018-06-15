@@ -12,7 +12,7 @@ using JS_Identity_Project.Models;
 
 namespace JS_Identity_Project.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -59,8 +59,7 @@ namespace JS_Identity_Project.Controllers
 
 
 
-
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult World()
         {
 
@@ -68,7 +67,6 @@ namespace JS_Identity_Project.Controllers
         }
 
 
-        [AllowAnonymous]
         public ActionResult Members()
         {
 
@@ -90,27 +88,36 @@ namespace JS_Identity_Project.Controllers
         [HttpPost]
         public ActionResult FinalizeEditUser(string email, string phonenumber, string username, string id)
         {
+            var model = UserManager.Users.ToList();
 
             var user = UserManager.FindById(id);
             user.Email = email;
             user.PhoneNumber = phonenumber;
             user.UserName = username;
 
-            return View("Members");
+            return View("Members", model);
         }
 
-        [HttpPost]
-        public ActionResult Details_user(int id)
-        {
 
-            return View();
+        public ActionResult Admin_flag(string id)
+        {
+            UserManager.AddToRole(id, "Admin");
+
+            var model = UserManager.Users.ToList();
+
+            return View("Members", model);
         }
 
-        [HttpPost]
-        public ActionResult Delete_user(int id)
+
+
+
+
+        public ActionResult Delete_user(string id)
         {
-            UserManager.Delete(UserManager.FindById(Convert.ToString(id)));
-            return View();
+            UserManager.Delete(UserManager.FindById(id));
+            var model = UserManager.Users.ToList();
+
+            return View("Members", model);
         }
 
 
