@@ -76,6 +76,10 @@ namespace JS_Identity_Project.Models
         [Display(Name = "Country")]
         public string Country { get; set; }
 
+        [Required]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

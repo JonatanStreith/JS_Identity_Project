@@ -1,0 +1,75 @@
+﻿@using JS_Identity_Project.Models;
+
+@{
+    ViewBag.Title = "World";
+
+    var world = new WorldContext();
+
+    var countries = world.Countries.ToList();
+    var cities = world.Cities.ToList();
+
+}
+
+<h2>World data</h2>
+
+<div class="row col-lg-6 col-md-6">
+    <span>Countries</span>
+    <table class="table">
+        <tr>
+            <th>
+                <span>Name</span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in countries)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit_user", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details_user", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete_user", new { id = item.Id })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+
+
+<div class="row col-lg-6 col-md-6">
+    <span>Cities</span>
+    <table class="table">
+        <tr>
+            <th>
+                <span>Name</span>
+            </th>
+            <th>
+                <span>In country</span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in cities)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.InCountry.Name)</td>
+
+
+                @*<td>
+                    @Ajax.ActionLink("Edit", "Edit_user", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details_user", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete_user", new { id = item.Id })
+                </td>*@
+            </tr>
+        }
+
+    </table>
+</div>
+
+

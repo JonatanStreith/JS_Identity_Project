@@ -1,0 +1,30 @@
+﻿@model JS_Identity_Project.Models.ApplicationUser
+
+
+    @using (Ajax.BeginForm("FinalizeEditUser", "Account", new { id = Model.Id }, new AjaxOptions
+    {
+
+        UpdateTargetId = Model.Id,
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace
+    }))
+
+    {
+<tr id="@Model">
+
+    <td>
+        <input type="email" name="email" value=@Model.Email />
+
+    </td>
+    <td>
+        <input type="text" name="phonenumber" value=@Model.PhoneNumber />
+
+    </td>
+    <td>
+        <input type="text" name="username" value=@Model.UserName />
+    </td>
+
+    </tr>
+
+    <input type = "submit" class="btn btn-default" value="Submit" />
+}

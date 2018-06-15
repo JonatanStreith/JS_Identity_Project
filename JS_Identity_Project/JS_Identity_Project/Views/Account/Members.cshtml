@@ -8,48 +8,80 @@
 
 
 <div class="row col-lg-12 col-md-12">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                <span>E-mail</span>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                <span>Phone number</span>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                <span>User name</span>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country.Name)
+                <span>Country</span>
+            </th>
+            <th>
+                <span>City</span>
             </th>
             <th></th>
         </tr>
 
+
+
+
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country.Name)
-            </td>
+            <tr id=@item.Id>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
 
-            <td>
-                @Html.ActionLink("Edit", "Edit_user", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details_user", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete_user", new { id = item.Id })
-            </td>
-        </tr>
+                @if (item.Country != null)
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+                @if (item.City != null)
+                {
+                    <td>@Html.DisplayFor(modelItem => item.City.Name)</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+
+
+                <td>
+
+
+                    @Ajax.ActionLink(linkText: "Edit",
+actionName: "Edit_user",
+controllerName: "Account",
+routeValues: new { id = item.Id },
+ajaxOptions: new AjaxOptions
+{
+     UpdateTargetId = item.Id,
+     InsertionMode = InsertionMode.Replace,
+     HttpMethod = "post"
+
+})
+
+
+
+
+                    @Html.ActionLink("Set as admin", "Admin_flag", new { id = item.Id }) |
+
+                    @Html.ActionLink("Details", "Details_user", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete_user", new { id = item.Id })
+                </td>
+            </tr>
         }
 
     </table>

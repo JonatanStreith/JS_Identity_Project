@@ -12,7 +12,7 @@ using JS_Identity_Project.Models;
 
 namespace JS_Identity_Project.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -56,22 +56,47 @@ namespace JS_Identity_Project.Controllers
 
 
 
+
+
+
+
+        [AllowAnonymous]
+        public ActionResult World()
+        {
+
+            return View();
+        }
+
+
+        [AllowAnonymous]
         public ActionResult Members()
         {
 
-            var model = UserManager.Users;
-
+            var model = UserManager.Users.ToList();
             ViewBag.Message = "Members page.";
 
             return View(model);
         }
 
 
+        //[HttpPost]
+        public ActionResult Edit_user(string id)
+        {
+            var user = UserManager.FindById(id);
+            return PartialView("PV_Edituser", user);
+        }
+
+
         [HttpPost]
-        public ActionResult Edit_user(int id)
+        public ActionResult FinalizeEditUser(string email, string phonenumber, string username, string id)
         {
 
-            return View();
+            var user = UserManager.FindById(id);
+            user.Email = email;
+            user.PhoneNumber = phonenumber;
+            user.UserName = username;
+
+            return View("Members");
         }
 
         [HttpPost]
@@ -87,6 +112,14 @@ namespace JS_Identity_Project.Controllers
             UserManager.Delete(UserManager.FindById(Convert.ToString(id)));
             return View();
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -191,9 +224,11 @@ namespace JS_Identity_Project.Controllers
             {
                 WorldContext WC = new WorldContext();
 
-                Country C = WC.Countries.ToList().Find(x => x.Name == model.Country);
+                Country _country = WC.Countries.ToList().Find(x => x.Name == model.Country);
+                City _city = WC.Cities.ToList().Find(x => x.Name == model.City);
 
-                var user = new ApplicationUser { UserName = model.UserName, Country = C, Email = model.Email };
+
+                var user = new ApplicationUser { UserName = model.UserName, Country = _country, City = _city, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
