@@ -1,32 +1,55 @@
 ﻿@model JS_Identity_Project.Models.ApplicationUser
 
 
-@using (Ajax.BeginForm("FinalizeEditUser", "Account", new { id = Model.Id }, new AjaxOptions
+@*@using (Ajax.BeginForm("FinalizeEditUser", "Account", new { id = Model.Id }, new AjaxOptions
+            {
+                UpdateTargetId = Model.Id,
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace
+
+    }))
+
         {
-            UpdateTargetId = Model.Id,
-            HttpMethod = "POST",
-            InsertionMode = InsertionMode.Replace
+    <tr id="@Model.Id">
 
-}))
+        <td>
+            <input type="email" name="email" value=@Model.Email />
 
-    {
-<tr id="@Model.Id">
+        </td>
+        <td>
+            <input type="text" name="phonenumber" value=@Model.PhoneNumber />
 
-    <td>
-        <input type="email" name="email" value=@Model.Email />
+        </td>
+        <td>
+            <input type="text" name="username" value=@Model.UserName />
+        </td>
+        <td>
+            <input type = "submit" class="btn btn-default" value="Submit" />
+        </td>
 
-    </td>
-    <td>
-        <input type="text" name="phonenumber" value=@Model.PhoneNumber />
+    </tr>
 
-    </td>
-    <td>
-        <input type="text" name="username" value=@Model.UserName />
-    </td>
-    <td>
-        <input type = "submit" class="btn btn-default" value="Submit" />
-    </td>
+    }*@
 
-</tr>
 
+@using (Html.BeginForm("FinalizeEditUser", "Account", FormMethod.Post, new { id = Model.Id }))
+{
+    <tr id="@Model.Id">
+
+        <td>
+            <input type="email" name="email" value=@Model.Email>
+
+        </td>
+        <td>
+            <input type="text" name="phonenumber" value=@Model.PhoneNumber>
+
+        </td>
+        <td>
+            <input type="text" name="username" value=@Model.UserName>
+        </td>
+        <td>
+            <input type="submit" class="btn btn-default" value="Submit">
+        </td>
+
+    </tr>
 }

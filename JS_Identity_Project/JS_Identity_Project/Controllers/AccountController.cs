@@ -85,7 +85,7 @@ namespace JS_Identity_Project.Controllers
         }
 
 
-        //[HttpPost]
+        [HttpPost]
         public ActionResult FinalizeEditUser(string email, string phonenumber, string username, string id)
         {
             var model = UserManager.Users.ToList();
